@@ -1,16 +1,20 @@
 const mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 
-const testUserSchema = new mongoose.Schema({
-	username: String,
+const UserSchema = new mongoose.Schema({
+  username: String,
+  password: String,
+  firstName: String,
+  surname: String,
+	birthdate: Date,
+	created: {
+    type: Date,
+    default: Date.now
+  }
 });
 
-const TestUser = mongoose.model('User', testUserSchema);
-TestUser.create({ username: 'Moi' }, (err, testUserDb) => {
-	if (err !== null) {
-		console.log('error', err);
-		res.send('An error occurred: test user not added');
-		return;
-	}
+UserSchema.plugin(passportLocalMongoose);
 
-	console.log('testUserDb', testUserDb);
-});
+const User = mongoose.model('User', UserSchema);
+
+module.exports = User;
