@@ -20,7 +20,7 @@ passport.deserializeUser(User.deserializeUser()); //receive user._id from the se
 
 const checkUser = (req, res, next) => {
 	if (req.isAuthenticated() === true) {
-		res.redirect('/admin');
+		res.redirect('/login');
 	} else {
 		next();
 	}
@@ -38,7 +38,6 @@ router.post('/', upload.single('profilePic'), (req, res) => {
 
 	let profilePicPath = req.file.path;
 	const clientPicPath = profilePicPath.replace('public', '');
-	console.log(clientPicPath);
 
 	const { username, password, firstname, surname } = req.body;
 
@@ -59,7 +58,7 @@ router.post('/', upload.single('profilePic'), (req, res) => {
 				//authenticate is local because we are in local here, but could be a facebook login, github...
 				//it will inject all user info : req.user, req.isAuthenticated() etc
 				passport.authenticate('local')(req, res, () => {
-					res.redirect('/admin');
+					res.redirect('/login');
 				});
 			}
 		}
