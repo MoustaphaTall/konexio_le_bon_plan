@@ -12,7 +12,7 @@ passport.deserializeUser(User.deserializeUser()); //receive user.id from the ses
 
 const checkUser = (req, res, next) => {
 	if (req.isAuthenticated() === true) {
-		res.redirect('/admin');
+		res.redirect('/profile');
 	} else {
 		next();
 	}
@@ -25,7 +25,7 @@ router.get('/', checkUser, (req, res) => {
 router.post(
 	'/',
 	passport.authenticate('local', {
-		successRedirect: '/admin',
+		successRedirect: '/profile',
 		failureRedirect: '/login',
 	})
 );
