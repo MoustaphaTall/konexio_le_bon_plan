@@ -10,9 +10,11 @@ const port = process.env.PORT || 3000;
 //Set up route controllers
 const homeRoute = require('./controllers/home');
 const loginRoute = require('./controllers/login');
-const productRoute = require('./controllers/product');
+const productsRoute = require('./controllers/products');
 const signupRoute = require('./controllers/signup');
 const logoutRoute = require('./controllers/logout');
+const adminRoute = require('./controllers/admin');
+const cityProductsRoute = require('./controllers/city_products');
 
 //Set up models where needed - delete where not
 const User = require('./models').User;
@@ -59,7 +61,9 @@ app.use(passport.session());
 app.use('/login', loginRoute);
 app.use('/signup', signupRoute);
 app.use('/logout', logoutRoute);
-app.use('/products', productRoute);
+app.use('/admin', adminRoute);
+app.use('/products', productsRoute);
+app.use('/products/cities', cityProductsRoute);
 app.use('/', homeRoute);
 
 app.listen(port, () => {
