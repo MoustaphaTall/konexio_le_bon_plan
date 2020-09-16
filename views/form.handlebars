@@ -1,0 +1,25 @@
+<div>
+    <h1>Ajouter un nouveau produit</h1>
+    <form action="/products" method="POST" enctype="multipart/form-data">
+        {{!-- créer le formulaire --}}
+        <div>
+            <input type="text" placeholder="Nom du produit" name="name" value="robe"/>
+        </div>
+        <div>
+            <input type="text" placeholder="Le prix du produit" name="price" value="23"/>
+        </div>
+        <div>
+            <input type="text" placeholder="La ville " name="city" value="paris"/>
+        </div>
+        <div>
+            <textarea id="description" name="description" value="Description du produit" rows="5" cols="33">Description du produit</textarea>
+        </div>
+        <div>
+            <input type="file" id="avatar1" name="photos">
+            <input type="file" id="avatar2" name="photos">
+            <input type="file" id="avatar3" name="photos">
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>

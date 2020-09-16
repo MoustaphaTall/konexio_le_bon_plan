@@ -7,6 +7,7 @@ const port = process.env.PORT || 3000;
 //Set up route controllers
 const homeRoute = require('./controllers/home');
 const loginRoute = require('./controllers/login');
+const productRoute = require('./controllers/product');
 
 //Set up models where needed - delete where not
 const User = require('./models').User;
@@ -16,7 +17,7 @@ mongoose.connect(
 	{
 		useNewUrlParser: true,
 		useCreateIndex: true,
-		useUnifiedTopology: true,
+		useUnifiedTopology: true
 	},
 	(err) => {
 		if (err !== null) {
@@ -37,6 +38,7 @@ app.use(express.json());
 
 // Set up routes
 app.use('/', homeRoute);
+app.use('/products', productRoute);
 
 app.listen(port, () => {
 	console.log(`Server started on port ${port}`);
