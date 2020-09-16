@@ -36,7 +36,15 @@ router.post('/', upload.single('profilePic'), (req, res) => {
 	console.log('/signup req.file', req.file);
 	console.log('/signup req.body', req.body);
 
-	let profilePicPath = req.file.path;
+	const placeholderPath = '/public/img/placeholder.png';
+	let profilePicPath = '';
+
+	if (typeof req.file === 'undefined') {
+		profilePicPath = placeholderPath;
+	} else {
+		profilePicPath = req.file.path;
+	}
+
 	const clientPicPath = profilePicPath.replace('public', '');
 
 	const { username, password, firstname, surname } = req.body;
