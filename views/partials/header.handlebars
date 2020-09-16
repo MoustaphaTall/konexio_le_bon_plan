@@ -16,9 +16,13 @@
                 <a class="dropdown-item" href="/products/cities/lyon">Lyon</a>
                 <a class="dropdown-item" href="/products/cities/marseille">Marseille</a>
             </div>
-        </div> <!-- /.nav-item dropdown-->
-        
+        </div> <!-- /.nav-item dropdown-->        
+        {{#if isAuthenticated}}
+            <a class="nav-item nav-link" href="/profile">Profile</a>
+            <a class="nav-item nav-link" href="/logout">Log out</a>        
+        {{else}}        
             <a class="nav-item nav-link" href="/login">Login</a>
             <a class="nav-item nav-link" href="/signup">Signup</a>        
+        {{/if}}
     </div>
 </nav>

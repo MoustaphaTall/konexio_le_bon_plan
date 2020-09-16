@@ -1,16 +1,33 @@
 const express = require('express');
 const router = express.Router();
-const expressSession = require('express-session');
-const MongoStore = require('connect-mongo')(expressSession);
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 
-// enable session management
-// app.use(
-// 	expressSession({
-// 		secret: 'grouplebonplan04',
-// 		resave: false,
-// 		saveUninitialized: false,
-// 		store:
-// 	})
-// )
+const { User } = require('../models');
+
+//configure passport
+passport.use(new LocalStrategy(User.authenticate())); //get user who authenticates himself
+passport.serializeUser(User.serializeUser()); //save user.id to the session, encrypting password
+passport.deserializeUser(User.deserializeUser()); //receive user.id from the session and fetch him from DB
+
+const checkUser = (req, res, next) => {
+	if (req.isAuthenticated() === true) {
+		res.redirect('/profile');
+	} else {
+		next();
+	}
+};
+
+router.get('/', checkUser, (req, res) => {
+	res.render('login');
+});
+
+router.post(
+	'/',
+	passport.authenticate('local', {
+		successRedirect: '/profile',
+		failureRedirect: '/login',
+	})
+);
+
+module.exports = router;
