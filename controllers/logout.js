@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/', (req, res) => {
 	console.log('GET /logout');
 	req.logout();
-	console.log(req.isAuthenticated());
+	console.log('/logout authenticated?', req.isAuthenticated());
 	res.redirect('/');
 });
 

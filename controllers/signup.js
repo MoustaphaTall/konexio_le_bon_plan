@@ -1,13 +1,9 @@
 const express = require('express');
-const exphbs = require('express-handlebars');
-const mongoose = require('mongoose');
+const fs = require('fs');
 const multer = require('multer');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const expressSession = require('express-session');
-const MongoStore = require('connect-mongo')(expressSession);
 
-const app = express();
 const router = express.Router();
 const upload = multer({ dest: 'public/profile_pics' });
 
@@ -26,6 +22,17 @@ const checkUser = (req, res, next) => {
 	}
 };
 
+const getNewPhotoPath = (fileObj, name) => {
+	const extensions = {
+		'image/png': 'png',
+		'image/jpeg': 'jpeg',
+	};
+	const extension = extensions[fileObj.mimetype];
+	const newName = name.replace(' ', '_');
+	const newPath = `${fileObj.destination}/${newName}.${extension}`;
+	return newPath;
+};
+
 router.get('/', checkUser, (req, res) => {
 	console.log('GET /signup');
 	res.render('signup');
@@ -37,17 +44,21 @@ router.post('/', upload.single('profilePic'), (req, res) => {
 	console.log('/signup req.body', req.body);
 
 	const placeholderPath = 'public/img/placeholder.png';
-	let profilePicPath = '';
-
-	if (typeof req.file === 'undefined') {
-		profilePicPath = placeholderPath;
-	} else {
-		profilePicPath = req.file.path;
-	}
-
-	const clientPicPath = profilePicPath.replace('public', '');
-
 	const { username, password, firstname, surname } = req.body;
+	const profilePicPath =
+		getNewPhotoPath(req.file, username) || placeholderPath;
+
+	if (profilePicPath !== placeholderPath) {
+		const path = req.file.path;
+
+		fs.rename(path, profilePicPath, (err) => {
+			if (err !== null) {
+				res.send('Error, try again');
+				console.log('Error renaming the file', err);
+				return;
+			}
+		});
+	}
 
 	//User.register(user, password, callback)
 	User.register(
@@ -55,7 +66,7 @@ router.post('/', upload.single('profilePic'), (req, res) => {
 			username,
 			firstname,
 			surname,
-			userPic: clientPicPath,
+			userPic: profilePicPath.replace('public', ''),
 		}),
 		password, //password will be hashed
 		(err, userDb) => {

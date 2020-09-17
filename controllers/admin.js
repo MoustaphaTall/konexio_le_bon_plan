@@ -9,17 +9,6 @@ router.get('/', (req, res) => {
 	res.render('admin');
 });
 
-// const pictureLinks = (files) => {
-// 	const urls = [];
-
-// 	for (let i = 0; i < files.length; i++) {
-// 		let url = `/uploads/${files[i].filename}.png`;
-// 		urls.push(url);
-// 	}
-
-// 	return urls;
-// };
-
 // route pour appeler la page où il y a le formulaire
 router.get('/products/add', (req, res) => {
 	res.render('addProduct');
