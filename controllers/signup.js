@@ -36,7 +36,7 @@ router.post('/', upload.single('profilePic'), (req, res) => {
 	console.log('/signup req.file', req.file);
 	console.log('/signup req.body', req.body);
 
-	const placeholderPath = '/public/img/placeholder.png';
+	const placeholderPath = 'public/img/placeholder.png';
 	let profilePicPath = '';
 
 	if (typeof req.file === 'undefined') {

@@ -13,6 +13,7 @@ const loginRoute = require('./controllers/login');
 const productsRoute = require('./controllers/products');
 const signupRoute = require('./controllers/signup');
 const logoutRoute = require('./controllers/logout');
+const profileRoute = require('./controllers/profile');
 const adminRoute = require('./controllers/admin');
 const cityProductsRoute = require('./controllers/city_products');
 
@@ -60,6 +61,9 @@ app.use(passport.session());
 // Pass authenticated status to all the application
 app.use((req, res, next) => {
 	res.locals.isAuthenticated = req.isAuthenticated();
+	if (req.isAuthenticated() === true) {
+		res.locals.user = req.user.toObject();
+	}
 	next();
 });
 
@@ -67,6 +71,7 @@ app.use((req, res, next) => {
 app.use('/login', loginRoute);
 app.use('/signup', signupRoute);
 app.use('/logout', logoutRoute);
+app.use('/profile', profileRoute);
 app.use('/admin', adminRoute);
 app.use('/products', productsRoute);
 app.use('/products/cities', cityProductsRoute);
