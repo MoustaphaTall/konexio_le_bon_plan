@@ -1,3 +1,19 @@
+/* NAVBAR */
 .navbar {
 	background-color: rgb(36, 72, 85);
+}
+
+.profile-pic-nav {
+	width: 45px;
+	height: 40px;
+	border-radius: 50px;
+}
+
+/* PROFILE */
+.profile-pic {
+	width: 250px;
+}
+
+.profile ul {
+	list-style-type: none;
 }
