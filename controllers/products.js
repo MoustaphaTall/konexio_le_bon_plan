@@ -14,7 +14,7 @@ router.get('/:id', (req, res) => {
 				price: product[0].price,
 				description: product[0].description,
 				city: product[0].city,
-				images: product[0].images
+				images: product[0].images,
 			});
 		}
 		res.re;

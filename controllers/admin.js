@@ -5,6 +5,10 @@ const upload = multer({ dest: 'public/uploads/' });
 const ProductModel = require('../models').Product;
 const fs = require('fs');
 
+const letterCapitalize = (word) => {
+	return word.charAt(0).toUpperCase() + word.substring(1, word.length);
+};
+
 router.get('/', (req, res) => {
 	res.render('admin');
 });
@@ -31,10 +35,10 @@ router.post('/products/add', upload.array('photos', 12), (req, res) => {
 	};
 	let imagesSrc = [];
 
-	rawImages.forEach((image, index) => {
+	rawImages.forEach((image) => {
 		const extension = extensions[image.mimetype];
-		const newName = name.replace(' ', '_');
-		const filename = `${newName}_${index}.${extension}`;
+		const newName = name.toLowerCase().replace(' ', '_');
+		const filename = `${newName}_${image.filename}.${extension}`;
 		const path = image.path;
 		const newPath = `${image.destination}${filename}`;
 
@@ -64,10 +68,10 @@ router.post('/products/add', upload.array('photos', 12), (req, res) => {
 
 	// création de l'objet product
 	const Product = new ProductModel({
-		name,
+		name: letterCapitalize(name),
 		price,
 		description,
-		city,
+		city: city.toLowerCase(),
 		images: imagesSrc,
 		user: userId,
 	});

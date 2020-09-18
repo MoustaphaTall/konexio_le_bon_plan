@@ -1,19 +1,105 @@
-/* NAVBAR */
-.navbar {
-	background-color: rgb(36, 72, 85);
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans&family=Kufam&display=swap');
+/*
+** GENERAL 
+*/
+body {
+	background-color: rgb(252, 246, 227);
+	font-family: 'Kufam', serif;
 }
 
-.profile-pic-nav {
-	width: 45px;
+h1[class*='title'] {
+	font-family: 'Kumbh Sans', sans-serif;
+	font-weight: 600;
+	color: rgb(255, 84, 0);
+	margin-bottom: 50px;
+}
+
+/* 
+** NAVBAR  
+*/
+.main-navbar {
+	background-color: rgb(36, 72, 85);
+	margin-bottom: 30px;
+}
+.main-navbar .navbar-brand {
+	font-size: 2.5em;
+}
+
+.main-navbar .profile-pic-nav {
+	width: 40px;
 	height: 40px;
 	border-radius: 50px;
+	object-fit: fill;
 }
 
-/* PROFILE */
+/*
+** HOME
+*/
+h1.home-title {
+	text-align: center;
+	font-size: 3.5em;
+	margin-top: 1.2em;
+}
+
+.home-cities-list {
+	list-style-type: none;
+	font-size: 1.5em;
+	font-weight: 600;
+}
+
+/* 
+** PROFILE 
+*/
 .profile-pic {
 	width: 250px;
 }
 
 .profile ul {
 	list-style-type: none;
+}
+
+/*
+** PRODUCT LIST 
+*/
+.product-list {
+	background-color: rgb(255, 252, 242);
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.product-list a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.product-list a:hover h2 {
+	color: rgb(255, 84, 0);
+}
+
+.product-list:hover {
+	background-color: rgba(255, 252, 244, 0.2);
+}
+
+.product-list-title {
+	color: rgb(237, 114, 0);
+}
+
+.product-imgcontainer {
+	height: 100%;
+}
+
+.product-imgcontainer img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+.product-list .price {
+	font-size: 2em;
+}
+
+/*
+** SIGNUP
+*/
+.signup label {
+	font-weight: bold;
 }

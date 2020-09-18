@@ -28,7 +28,7 @@ const getNewPhotoPath = (fileObj, name) => {
 		'image/jpeg': 'jpeg',
 	};
 	const extension = extensions[fileObj.mimetype];
-	const newName = name.replace(' ', '_');
+	const newName = name.toLowerCase().replace(' ', '_');
 	const newPath = `${fileObj.destination}/${newName}.${extension}`;
 	return newPath;
 };
