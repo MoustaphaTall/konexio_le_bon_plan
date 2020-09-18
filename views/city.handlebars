@@ -1,0 +1,14 @@
+{{>header}}
+
+<h1>Products</h1>
+
+{{#each products}}
+  {{#each this.images}}
+    <img src= '{{this}}' />
+  {{/each}}
+
+  <h2>{{this.name}}</h2>
+  <p> {{this.price}}</p>
+  <p> {{this.city}}</p>
+  <p> {{this.description}}</p>
+{{/each}}

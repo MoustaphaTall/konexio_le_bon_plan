@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
+<nav class="navbar navbar-expand navbar-dark">
     <a class="navbar-brand" href="/">LBP</a>
-    <div class="navbar-nav">
+    <div class="navbar-nav align-items-baseline">
         <a class="nav-item nav-link" href="/">Home</a>                
         <div class="nav-item dropdown">
             <a 
@@ -18,9 +18,13 @@
             </div>
         </div> <!-- /.nav-item dropdown-->        
         {{#if isAuthenticated}}
-            <a class="nav-item nav-link" href="/profile">Profile</a>
+            <a class="nav-item nav-link" href="/admin">Admin</a>            
+            <a class="nav-item nav-link" href="/profile">
+                <img src={{user.userPic}} alt="{{user.username}}'s profile picture" class="profile-pic-nav" />
+                Profile
+            </a>
             <a class="nav-item nav-link" href="/logout">Log out</a>        
-        {{else}}        
+        {{else}}                    
             <a class="nav-item nav-link" href="/login">Login</a>
             <a class="nav-item nav-link" href="/signup">Signup</a>        
         {{/if}}

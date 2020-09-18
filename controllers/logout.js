@@ -1,11 +1,11 @@
 const express = require('express');
 
-const app = express();
 const router = express.Router();
 
 router.get('/', (req, res) => {
 	console.log('GET /logout');
 	req.logout();
+	console.log('/logout authenticated?', req.isAuthenticated());
 	res.redirect('/');
 });
 
