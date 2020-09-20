@@ -5,7 +5,10 @@ const MongoStore = require('connect-mongo')(expressSession);
 const passport = require('passport');
 const mongoose = require('mongoose');
 
-const port = process.env.PORT || 3000;
+require('dotenv').config();
+
+const { PORT, MONGODB_URI } = process.env;
+const port = PORT || 3000;
 
 //Set up route controllers
 const homeRoute = require('./controllers/home');
@@ -21,7 +24,7 @@ const cityProductsRoute = require('./controllers/city_products');
 const User = require('./models').User;
 
 mongoose.connect(
-	process.env.MONGODB_URI || 'mongodb://localhost:27017/le_bon_plan',
+	MONGODB_URI,
 	{
 		useNewUrlParser: true,
 		useCreateIndex: true,
